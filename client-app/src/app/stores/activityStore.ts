@@ -22,14 +22,19 @@ export default class ActivityStore {
     loadActivities = async () => {
         try {
             const activities = await agent.Activities.list();
-            activities.forEach(activity => {
-                activity.date = activity.date.split('T')[0]
-                this.activityRegistry.set(activity.id, activity);
-              })
-              this.setLoadingInitial(false);
+            runInAction (() => {
+                activities.forEach(activity => {
+                    activity.date = activity.date.split('T')[0]
+                    this.activityRegistry.set(activity.id, activity);
+                  })
+                  this.setLoadingInitial(false);
+            })
+            
         } catch (error) {
             console.log(error)
-            this.setLoadingInitial(false);
+            runInAction(() => {
+                this.setLoadingInitial(false);
+            })
         }
     }
 
