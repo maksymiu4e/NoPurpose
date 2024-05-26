@@ -8,6 +8,15 @@ import HomePage from '../../features/home/HomePage';
 function App() {
   const location = useLocation();
 
+  // console error solution
+  // defaultProps will be removed from function components in a future major release.
+  // Use JavaScript default parameters instead.
+  const error = console.error;
+  console.error = (...args) => {
+      if (/defaultProps/.test(args[0])) return;
+      error(...args);
+  };
+
   return (
     <>
       {location.pathname === '/' ? <HomePage /> : (

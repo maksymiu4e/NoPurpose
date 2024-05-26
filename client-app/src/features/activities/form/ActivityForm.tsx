@@ -7,12 +7,10 @@ import { Activity } from '../../../app/models/activity';
 import LoadingComponent from '../../../app/layout/LoadingComponent';
 import {v4 as uuid } from 'uuid';
 
-interface Props {}
-
 export default observer(function ActivityForm() {
 
     const {activityStore} = useStore();
-    const {selectedActivity, createActivity, updateActivity,
+    const {createActivity, updateActivity,
          loading, loadActivity, loadingInitial} = activityStore;
 
     const {id} = useParams();
